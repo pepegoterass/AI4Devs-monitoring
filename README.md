@@ -160,3 +160,62 @@ POST http://localhost:3010/candidates
 }
 ```
 
+## 📊 Monitorización con Datadog
+
+### Configuración de Datadog
+
+Este proyecto incluye una integración completa con Datadog para monitorización de infraestructura y aplicaciones en AWS.
+
+#### Características implementadas:
+
+- **Integración AWS-Datadog**: Configuración automática de roles IAM y permisos
+- **Agente Datadog**: Instalación automática en instancias EC2
+- **Dashboard personalizado**: Visualización de métricas clave de infraestructura
+- **Alertas automatizadas**: Monitoreo de CPU, memoria y recursos críticos
+- **Logs centralizados**: Recolección de logs de aplicaciones y sistema
+- **APM (Application Performance Monitoring)**: Trazabilidad de aplicaciones
+
+#### Métricas monitorizadas:
+
+- CPU Utilization de instancias EC2
+- Memoria y uso de disco
+- Tráfico de red (In/Out)
+- Operaciones de Disco I/O
+- Métricas de contenedores Docker
+- Logs de aplicaciones (Frontend/Backend)
+
+#### Configuración requerida:
+
+1. **Credenciales Datadog**: Obtén tu API Key y App Key desde tu cuenta Datadog
+2. **Variables de entorno**: Configura las variables en `terraform.tfvars`
+3. **Deploy**: Ejecuta Terraform para provisionar la infraestructura
+
+```bash
+# En el directorio tf/
+cp terraform.tfvars.example terraform.tfvars
+# Edita terraform.tfvars con tus credenciales
+terraform init
+terraform plan
+terraform apply
+```
+
+#### Acceso al Dashboard:
+
+Una vez desplegado, puedes acceder al dashboard "LTI AWS Infrastructure Monitoring" en tu cuenta Datadog para visualizar:
+
+- Estado en tiempo real de la infraestructura
+- Alertas y notificaciones
+- Análisis de performance de aplicaciones
+- Logs centralizados con filtros avanzados
+
+#### Alertas configuradas:
+
+- **High CPU Alert**: Se activa cuando CPU > 80% (crítico) o > 70% (warning)
+- **High Memory Alert**: Se activa cuando memoria disponible < 15% (crítico) o < 20% (warning)
+
+Para más detalles sobre la implementación, consulta la [documentación de prompts](./prompts/datadog-aws-prompts.md).
+
+---
+
+*Última actualización: Septiembre 2025*
+
