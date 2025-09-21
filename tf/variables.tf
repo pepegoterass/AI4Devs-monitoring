@@ -41,3 +41,33 @@ variable "datadog_external_id" {
   type        = string
   default     = "datadog-external-id"
 }
+
+variable "datadog_forwarder_lambda_arn" {
+  description = "ARN of the Datadog Forwarder Lambda function for log collection"
+  type        = string
+  default     = ""
+}
+
+variable "datadog_site" {
+  description = "Datadog site (datadoghq.com or datadoghq.eu)"
+  type        = string
+  default     = "datadoghq.com"
+}
+
+variable "project_name" {
+  description = "Name of the project"
+  type        = string
+  default     = "ai4devs-monitoring"
+}
+
+variable "environment" {
+  description = "Environment (dev, staging, production)"
+  type        = string
+  default     = "dev"
+}
+
+variable "enable_datadog_logs" {
+  description = "Enable Datadog log collection"
+  type        = bool
+  default     = true
+}

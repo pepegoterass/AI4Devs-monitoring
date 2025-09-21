@@ -6,24 +6,31 @@ sudo yum install -y docker
 sudo service docker start
 
 # Install Datadog Agent
-DD_API_KEY="${datadog_api_key}" DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY="${datadog_api_key}" DD_SITE="${datadog_site}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
 # Configure Datadog Agent
 cat <<EOF > /etc/datadog-agent/datadog.yaml
 api_key: ${datadog_api_key}
-site: datadoghq.com
+site: ${datadog_site}
 tags:
   - env:production
   - service:lti-backend
   - project:lti-monitoring
   - instance_type:backend
+  - region:${aws_region}
 logs_enabled: true
+log_level: INFO
 process_config:
   enabled: "true"
 apm_config:
   enabled: true
   env: production
   service: lti-backend
+  apm_non_local_traffic: true
+system_probe_config:
+  enabled: true
+  network_config:
+    enabled: true
 EOF
 
 # Configure Docker integration
